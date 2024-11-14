@@ -30,7 +30,7 @@ extern size_t  Insert      (String *data, String *insert,   const int index); //
 
 // Удаление текста :
 extern void    RemoveStart (String *data, const size_t removed_length);                     // Удаляет removed_length символов с начала строки
-extern void    RemovEnd    (String *data, const size_t removed_length);                     // Удаляет removed_length символов с конца строки
+extern void    RemoveEnd    (String *data, const size_t removed_length);                     // Удаляет removed_length символов с конца строки
 extern void    RemoveAt    (String *data, const size_t removed_length, const size_t index); // Удаляет removed_length символов начиная с index, не удаленные символы переносятся в начало
 
 //  Работа с stdout :

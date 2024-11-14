@@ -5,12 +5,23 @@
 #include <stdio.h>
 #include <string.h>
 
+String *read_line() {
+    String *line = NewString();
+    String *buffer = NewCustomString(256);
+    while (fgets(buffer->text, buffer->_itemCount, stdin)) {
+        AppendC(line, buffer->text);
+        size_t new_lins = IndexOfC(line, "\n");
+        if(new_lins != line->length) {
+            RemoveEnd(line, line->length - new_lins);
+            break;
+        }
+    }
+    FreeString(buffer);
+    return line;
+}
 
-String *read_fiel() {
-    String *fiel_name = NewString();
-    scanf("%[^\n]", fiel_name->text);
+String *read_fiel(String *fiel_name) {
     FILE *fiel = fopen(fiel_name->text, "r");
-    FreeString(fiel_name);
     String *result = NewString();
     char buffer[256];
     if(fiel) {
@@ -23,9 +34,10 @@ String *read_fiel() {
 }
 
 int main() {
-    String *test = NewSetString("121211211111");
-    Replase(test, "12", "RATATATATA");
-    PrintString(test);
-    FreeString(test);
+    String *fiel_name = read_line();
+    String *fiel = read_fiel(fiel_name);
+    PrintString(fiel);
+    FreeString(fiel_name);
+    FreeString(fiel);
     return 0;
 };
