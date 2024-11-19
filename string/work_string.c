@@ -139,7 +139,6 @@ void AppendC(String *data,  const char *added_text) {
 void Append(String *data, String *insert)
 {
     AppendC(data, insert->text);
-    FreeString(insert);
 }
 
 // Удаляет removed_length символов с начала строки
@@ -211,7 +210,8 @@ int PrintString(const String *data) {
 size_t CountSubstringC(const String *data, const char *substring) {
     const size_t substring_length = strlen(substring);
     size_t counter = 0;
-    for (size_t i = 0; i < data->length - substring_length; i++) {
+    long verification_area = (long)data->length - (long)substring_length;
+    for (size_t i = 0; (long)i < verification_area; i++) {
         String *buffer = GetSubstring(data, i, i + substring_length);
         if (__StartsWith(buffer->text, substring))
             counter++;
@@ -243,10 +243,8 @@ size_t IndexOf(const String *data, const String *substring) {
 
 String *Replase(String *data, char *replacement, char *to_replase) {
     size_t items = CountSubstringC(data, replacement);
-    printf("items == %d\n", items);
     for (size_t i = 0; i < items; i++) {
         size_t index = IndexOfC(data, replacement);
-        printf("text == %d, index == %d\n", strlen(replacement), index );
         RemoveAt(data, strlen(replacement), index);
         InsertC(data, to_replase, index);
     }

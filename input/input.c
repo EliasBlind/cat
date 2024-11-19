@@ -32,12 +32,3 @@ String *read_fiel(String *fiel_name) {
     }
     return result;
 }
-
-int main() {
-    String *fiel_name = read_line();
-    String *fiel = read_fiel(fiel_name);
-    PrintString(fiel);
-    FreeString(fiel_name);
-    FreeString(fiel);
-    return 0;
-};
